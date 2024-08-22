@@ -18,3 +18,9 @@
 .idea
 .idea/
 .fleet/
+node_modules
+
+# Local Netlify folder
+.netlify
+package-lock.json
+package.json

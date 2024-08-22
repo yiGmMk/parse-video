@@ -1,0 +1,7 @@
+[functions]
+directory = "api"
+
+[[redirects]]
+from = "/*"
+to = "/.netlify/functions/parse"
+status = 200

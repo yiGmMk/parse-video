@@ -1,7 +1,9 @@
-package main
+package parse
 
 import (
 	"context"
+	"embed"
+	"io/fs"
 	"log"
 
 	"github.com/aws/aws-lambda-go/events"
@@ -11,7 +13,12 @@ import (
 	h "github.com/wujunwei928/parse-video/handler"
 )
 
-var ginLambda *ginadapter.GinLambda
+var (
+	ginLambda *ginadapter.GinLambda
+
+	//go:embed templates/*
+	files embed.FS
+)
 
 type HttpResponse struct {
 	Code int         `json:"code"`
@@ -21,7 +28,11 @@ type HttpResponse struct {
 
 func init() {
 	r := gin.Default()
-	h.RegisterHandler(r, "../../templates/*")
+	sub, err := fs.Sub(files, "templates")
+	if err != nil {
+		panic(err)
+	}
+	h.RegisterHandler(r, sub)
 
 	ginLambda = ginadapter.New(r)
 }

@@ -2,6 +2,8 @@ package main
 
 import (
 	"context"
+	"embed"
+	"io/fs"
 	"log"
 	"net/http"
 	"os"
@@ -12,10 +14,16 @@ import (
 	"github.com/wujunwei928/parse-video/handler"
 )
 
+//go:embed templates/*
+var files embed.FS
+
 func main() {
 	r := gin.Default()
-
-	handler.RegisterHandler(r, "templates/*")
+	sub, err := fs.Sub(files, "templates")
+	if err != nil {
+		panic(err)
+	}
+	handler.RegisterHandler(r, sub)
 
 	srv := &http.Server{
 		Addr:    ":8080",

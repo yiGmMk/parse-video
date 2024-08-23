@@ -36,7 +36,7 @@ func init() {
 	ginLambda = ginadapter.New(router)
 }
 
-func handler(ctx context.Context, req events.APIGatewayProxyRequest) (*events.APIGatewayProxyResponse, error) {
+func Handler(ctx context.Context, req events.APIGatewayProxyRequest) (*events.APIGatewayProxyResponse, error) {
 	res, err := ginLambda.ProxyWithContext(ctx, req)
 	if err != nil {
 		log.Default().Println(err)
@@ -46,5 +46,5 @@ func handler(ctx context.Context, req events.APIGatewayProxyRequest) (*events.AP
 
 // netlify
 func main() {
-	lambda.Start(handler)
+	lambda.Start(Handler)
 }

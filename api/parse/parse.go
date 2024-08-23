@@ -26,14 +26,14 @@ type HttpResponse struct {
 }
 
 func init() {
-	r := gin.Default()
+	router := gin.Default()
 	sub, err := fs.Sub(files, "templates")
 	if err != nil {
 		panic(err)
 	}
-	h.RegisterHandler(r, sub)
+	h.RegisterHandler(router, sub)
 
-	ginLambda = ginadapter.New(r)
+	ginLambda = ginadapter.New(router)
 }
 
 func handler(ctx context.Context, req events.APIGatewayProxyRequest) (*events.APIGatewayProxyResponse, error) {
@@ -44,6 +44,7 @@ func handler(ctx context.Context, req events.APIGatewayProxyRequest) (*events.AP
 	return &res, err
 }
 
+// netlify
 func main() {
 	lambda.Start(handler)
 }

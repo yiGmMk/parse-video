@@ -9,7 +9,7 @@ import (
 	"github.com/wujunwei928/parse-video/handler"
 )
 
-//go:embed parse/templates/*
+//go:embed templates/*
 var files embed.FS
 var router *gin.Engine
 

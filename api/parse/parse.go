@@ -1,4 +1,5 @@
-package parse
+// netlify函数这里必须是main
+package main
 
 import (
 	"context"
@@ -13,12 +14,10 @@ import (
 	h "github.com/wujunwei928/parse-video/handler"
 )
 
-var (
-	ginLambda *ginadapter.GinLambda
+var ginLambda *ginadapter.GinLambda
 
-	//go:embed templates/*
-	files embed.FS
-)
+//go:embed templates/*
+var files embed.FS
 
 type HttpResponse struct {
 	Code int         `json:"code"`

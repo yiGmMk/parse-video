@@ -18,13 +18,13 @@ type HttpResponse struct {
 func RegisterHandler(r *gin.Engine, files fs.FS) {
 	// 这里依赖操作系统的文件系统，使用fs之后可以用embed的文件系统
 	// r.LoadHTMLGlob(path)
-	// r.GET("/", func(c *gin.Context) {
-	// 	c.HTML(200, "index.tmpl", gin.H{
-	// 		"title": "github.com/wujunwei928/parse-video Demo",
-	// 	})
-	// })
-	r.SetHTMLTemplate(template.Must(template.ParseFS(files, "*.tmpl")))
 
+	r.SetHTMLTemplate(template.Must(template.ParseFS(files, "*.tmpl")))
+	r.GET("/", func(c *gin.Context) {
+		c.HTML(200, "index.tmpl", gin.H{
+			"title": "github.com/wujunwei928/parse-video Demo",
+		})
+	})
 	r.GET("/video/share/url/parse", func(c *gin.Context) {
 		paramUrl := c.Query("url")
 		parseRes, err := parser.ParseVideoShareUrlByRegexp(paramUrl)

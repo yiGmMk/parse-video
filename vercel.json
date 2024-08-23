@@ -1,0 +1,17 @@
+{
+    "build": {
+        "env": {
+            "GO_BUILD_FLAGS": "-ldflags '-s -w'"
+        }
+    },
+    "routes": [
+        {
+            "src": "/*",
+            "dest": "/api/parse.go"
+        }
+    ],
+    "functionFailoverRegions": [
+        "hkg1",
+        "sin1"
+    ]
+}

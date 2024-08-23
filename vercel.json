@@ -10,8 +10,5 @@
             "dest": "/api/parse.go"
         }
     ],
-    "functionFailoverRegions": [
-        "hkg1",
-        "sin1"
-    ]
+    "functionFailoverRegions": []
 }
